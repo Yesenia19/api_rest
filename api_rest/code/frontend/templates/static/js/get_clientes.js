@@ -1,8 +1,10 @@
 function getClientes() {
     var request = new XMLHttpRequest();
     //Accede a la session de la pagina
-    username= sessionStorage.getItem("username");
-    password= sessionStorage.getItem("password");
+    //username= sessionStorage.getItem("username");
+    //password= sessionStorage.getItem("password");
+    username ="user";
+    password ="user";
    
     request.open('GET', 'https://8000-yesenia19-apirest-6xk2vh2kwcd.ws-us53.gitpod.io/clientes/');
     request.setRequestHeader("Accept", "application/json");
@@ -14,11 +16,14 @@ function getClientes() {
     var tblHead = document.createElement("thead");
     
     tblHead.innerHTML = `
+        <a href='/post_cliente.html?'>Cliente nuevo</a>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Detalle</th>
+            <th>Actualizar</th>
+            <th>Borrar</th>
         </tr>`;
    
     request.onload = () => {
@@ -38,17 +43,23 @@ function getClientes() {
                     var nombre = document.createElement('td');
                     var email = document.createElement('td');
                     var detalle = document.createElement('td');
-    
+                    var actualizar = document.createElement('td');
+                    var eliminar = document.createElement('td');
+
                     id_cliente.innerHTML = json[a].id_cliente;
                     nombre.innerHTML = json[a].nombre;
                     email.innerHTML = json[a].email;
-                    detalle.innerHTML = "<a href='/templates/get_cliente.html?" + json[a].id_cliente + "'>Ver</a>";
+                    detalle.innerHTML = "<a href='/get_cliente.html?" + json[a].id_cliente + "'>Ver</a>";
+                    actualizar.innerHTML = "<a href='/put_cliente.html?" + json[a].id_cliente + "'>Actualizar</a>";
+                    eliminar.innerHTML = "<a href='/delete_cliente.html?" + json[a].id_cliente +  "'>Eliminar</a>";
 
                     tr.appendChild(id_cliente);
                     tr.appendChild(nombre);
                     tr.appendChild(email);
                     tr.appendChild(detalle);
-                    
+                    tr.appendChild(actualizar);
+                    tr.appendChild(eliminar);
+
                     tblBody.appendChild(tr);
                 }
                 tabla.appendChild(tblHead);

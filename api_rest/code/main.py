@@ -140,7 +140,7 @@ async def post_cliente(nombre: str, email:str,level: int = Depends(get_current_l
             headers={"WWW-Authenticate": "Basic"},
         )
 
-@app.post(  
+@app.put(  
     "/PUT/{id}&{nombre}&{email}",
     response_model=Respuesta,
     status_code=status.HTTP_202_ACCEPTED,
