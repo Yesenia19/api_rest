@@ -1,7 +1,7 @@
 function getCliente() {
     //Accede a la session de la pagina
-    username= "admin";
-    password= "admin";
+    username= sessionStorage.getItem("username");
+    password= sessionStorage.getItem("password");
 
     var id =window.location.search.substring(1);
 
